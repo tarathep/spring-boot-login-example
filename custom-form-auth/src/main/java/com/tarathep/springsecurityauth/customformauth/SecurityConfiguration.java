@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((authz) -> {
                 try {
@@ -30,21 +30,21 @@ public class SecurityConfiguration {
                     e.printStackTrace();
                 }
             }
-            )
-            .httpBasic();
+            );
         return http.build();
     }
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
+    public InMemoryUserDetailsManager configure() {
+        // PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        // // outputs {bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG
+        // // remember the password that is printed out and use in the next step
+        // System.out.println("==============> "+encoder.encode("password"));
 
-        // in the login.html is mapping with input name = username, password
-        UserDetails user = User.withDefaultPasswordEncoder()
-            .username("user")
-            .password("password")
+        UserDetails user = User.withUsername("user")
+            .password("{bcrypt}$2a$10$DDm1uVxfiZiPmK5amD0ZVu1YdVuLqYHZaw8/NzeuRkZ62/pNLbi/q")
             .roles("USER")
             .build();
-
         return new InMemoryUserDetailsManager(user);
     }
 }
