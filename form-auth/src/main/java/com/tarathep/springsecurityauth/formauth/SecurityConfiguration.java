@@ -15,7 +15,7 @@ public class SecurityConfiguration {
     
     // use form default
     @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+    public SecurityFilterChain configurFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((authz) -> {
                 try {
@@ -35,7 +35,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public InMemoryUserDetailsManager configure() {
+    public InMemoryUserDetailsManager configureInMemoryUserDetailsManager() {
 
         //password is not work!!
         UserDetails user = User.withUsername("user")
