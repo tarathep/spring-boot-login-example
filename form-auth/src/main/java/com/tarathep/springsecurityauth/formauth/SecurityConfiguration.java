@@ -36,8 +36,7 @@ public class SecurityConfiguration {
 
     @Bean
     public InMemoryUserDetailsManager configureInMemoryUserDetailsManager() {
-
-        //password is not work!!
+        
         UserDetails user = User.withUsername("user")
             .password("{bcrypt}$2a$10$DDm1uVxfiZiPmK5amD0ZVu1YdVuLqYHZaw8/NzeuRkZ62/pNLbi/q")
             .roles("USER")
